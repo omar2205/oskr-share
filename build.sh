@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 rm -rf dist/*
 pnpm build
 cd dist
