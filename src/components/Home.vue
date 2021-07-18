@@ -19,7 +19,7 @@
     :title="item.title"
   >
     <van-cell>{{ item.text }}</van-cell>
-    <van-cell v-if="item.text.startsWith('http')"><a href="{item.text}">Go to link</a></van-cell>
+    <van-cell v-if="item.text.startsWith('http')"><a :href="item.text">Go to link</a></van-cell>
   </van-cell-group>
 
   <van-popup
