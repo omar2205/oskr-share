@@ -25,7 +25,6 @@ const props = defineProps({
 const router = useRouter()
 
 onMounted(async () => {
-    window.location.replace('/')
     const q = query(
         collection(db, 'oskr-share'),
         where('text', '==', props.query.text)
@@ -42,10 +41,12 @@ onMounted(async () => {
             url: props.query.url || 'null',
             created_at: new Date(),
         })
+    window.location.replace('/')
         router.push('/')
     } catch (err) {
         console.log(err)
         Toast.fail('err')
+        window.location.replace('/')
         router.push('/')
     }
 })
