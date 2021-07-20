@@ -12,14 +12,12 @@
     </van-cell>
   </van-cell-group>
   -->
-  <van-cell-group
-    inset
-    v-for="item in s"
-    :key="item.id"
-    :title="item.title"
-  >
+  <van-cell-group inset v-for="item in s" :key="item.id" :title="item.title">
     <van-cell>{{ item.text }}</van-cell>
-    <van-cell v-if="item.text.startsWith('http')"><a :href="item.text">Go to link</a></van-cell>
+    <van-cell value-class="right-value" v-if="item.text.startsWith('http')">
+      <a href="#" @click="removeItem(item.id)">Remove</a>
+      <a :href="item.text">Go to link</a></van-cell
+    >
   </van-cell-group>
 
   <van-popup
@@ -76,6 +74,8 @@ import {
   orderBy,
   query,
   addDoc,
+  deleteDoc,
+  where,
 } from 'firebase/firestore'
 import db from '../db.js'
 
@@ -97,9 +97,13 @@ onMounted(async () => {
   const q = query(collection(db, 'oskr-share'), orderBy('created_at', 'desc'))
   const unsub = onSnapshot(q, (qS) => {
     s.value = []
-    qS.forEach((doc) => s.value.push(doc.data()))
+    qS.forEach((doc) => s.value.push({...doc.data(), id: doc.id}))
   })
 })
+
+const removeItem = async (id) => {
+  await deleteDoc(doc(db, 'oskr-share', id))
+}
 
 const onSubmit = async (e) => {
   console.log(e)
@@ -124,5 +128,11 @@ const onSubmit = async (e) => {
 body {
   background-color: #f7f8fa;
   height: 100vh;
+}
+.right-value {
+  text-align: right;
+}
+.right-value a:not(:last-child) {
+  margin-right: 1rem;
 }
 </style>
