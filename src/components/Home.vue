@@ -1,17 +1,4 @@
 <template>
-  <!--
-  <van-cell-group inset>
-    <van-cell
-      >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi, molestiae
-      nihil ut, rem fuga debitis illum non eum recusandae deserunt minus.
-      Laudantium ab ducimus esse aut quibusdam praesentium suscipit!
-      Nobis!</van-cell
-    >
-    <van-cell>
-      <a href="https://www.tomshardware.com/news/quantum-computing-cambridge-riverland">https://www.tomshardware.com/news/quantum-computing-cambridge-riverland</a>
-    </van-cell>
-  </van-cell-group>
-  -->
   <van-cell-group inset v-for="item in s" :key="item.id" :title="item.title">
     <van-cell>{{ item.text }}</van-cell>
     <van-cell value-class="right-value" v-if="item.text.startsWith('http')">
