@@ -5,6 +5,9 @@
       <a href="#" @click="removeItem(item.id)">Remove</a>
       <a :href="item.text">Go to link</a></van-cell
     >
+    <van-cell value-class="right-value" v-else>
+      <a href="#" @click="removeItem(item.id)">Remove</a>
+    </van-cell>
   </van-cell-group>
 
   <van-popup
@@ -84,7 +87,7 @@ onMounted(async () => {
   const q = query(collection(db, 'oskr-share'), orderBy('created_at', 'desc'))
   const unsub = onSnapshot(q, (qS) => {
     s.value = []
-    qS.forEach((doc) => s.value.push({...doc.data(), id: doc.id}))
+    qS.forEach((doc) => s.value.push({ ...doc.data(), id: doc.id }))
   })
 })
 
