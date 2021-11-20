@@ -125,4 +125,14 @@ body {
 .right-value a:not(:last-child) {
   margin-right: 1rem;
 }
+
+.van-cell-group,
+.van-cell-group__title {
+  width: min(90vw, 600px);
+  margin: 0 auto;
+}
+
+.van-cell-group {
+  margin-bottom: 1.2rem;
+}
 </style>
